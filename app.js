@@ -23,6 +23,7 @@ app.use(express.json());
 //a request -> an object with a lot of properties and methods, so big.
 //check documentation from expresjs related to requests, response and next
 
+
 app.use(function(req, res, next){
     console.log("Hello World 1 ...");
     next();
