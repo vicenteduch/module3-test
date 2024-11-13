@@ -53,9 +53,22 @@ app.get("/about", function (req, res, next) {
 })
 
 //GET /pizzas
+//GET /pizzas?maxPrice=15
 app.get("/pizzas", function (req, res, next) {
-    res.json(data);
-})
+
+    const maxPrice = req.query.maxPrice;
+    // if maxPrice is not provided, return the whole list
+    if(maxPrice === undefined){
+        res.json(data);
+        return
+    }
+    // if maxPrice is privided, return only the pizzas 
+    const result =  data.filter( (pizzaObj) => {
+      return pizzaObj.price <= maxPrice;
+    });
+
+    res.json(result);
+});
 
 //GET pizzas by id
 app.get("/pizzas/:pizzaId", function (req, res, next) {
